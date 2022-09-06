@@ -3,7 +3,7 @@ const path = require('node:path');
 const { SlashCommandBuilder, Routes } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 
-const { clientId, guildId } = require('./config.json');
+const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
 const commandsPath = path.join(__dirname, 'commands');
@@ -15,7 +15,7 @@ for (const file of commandFiles) {
 	commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: '10' }).setToken(process.env['key']);
+const rest = new REST({ version: '10' }).setToken(token);
 
 rest.put(Routes.applicationCommands(clientId), { body: commands })
 	.then((data) => console.log(`Successfully registered ${data.length} application commands.`))
