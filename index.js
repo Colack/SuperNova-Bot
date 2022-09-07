@@ -1,52 +1,42 @@
-// Declare and Import Packages
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, EmbedBuilder, ActivityType } = require('discord.js');
 const fetch = require('node-fetch');
+const express = require('express');
 
-// Client IDS and Tokens
 const clientID = "1011782808676606042";
-const { clientId, guildId, token } = require('./config.json');
+const token = process.env['key'];
+const { clientId, guildId } = require('./config.json');
 
-// Create a new client
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const app = express();
 
-// Create a commands collection
 client.commands = new Collection();
 
-// Get new commands from the 'commands' directory.
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-// Get new events from the 'events' directory.
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+app.get('/', (req, res) => {
+    res.send('OK');
+});
 
-// Search the 'commands' folder for all command files.
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
 	client.commands.set(command.data.name, command);
 }
 
-// Search the 'events' folder for all event files.
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
-	}
-}
+client.on('ready', () => {
+    console.log("Bot is logged in!", client.user.tag);
+});
 
-// Executed on Interactions
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = interaction.client.commands.get(interaction.commandName);
 
 	if (!command) return;
+
 	try {
 		await command.execute(interaction);
 	} catch (error) {
@@ -55,5 +45,8 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-// Login into Discord
 client.login(token);
+
+app.listen(8080, () => {
+    console.log('HTTP server ready!');
+});
