@@ -2,7 +2,7 @@
 # SuperNova
 
 This is the official mirror of my Discord (v14) Bot, SuperNova.
-Check the license (MIT) for more information about copying.
+Check the license (GPL) for more information about copying.
 
 
 
