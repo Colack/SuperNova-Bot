@@ -35,7 +35,13 @@ client.on('ready', () => {
 		client.user.setPresence({
   		activities: [{ name: `${client.guilds.cache.size} servers. 👀`, type: ActivityType.Watching }],
   		status: 'dnd',
-		});
+		})
+		setInterval(() => 
+			client.user.setPresence({
+  			activities: [{ name: `${client.guilds.cache.size} servers. 👀`, type: ActivityType.Watching }],
+  			status: 'dnd',
+			})
+		,300000);
 });
 
 client.on('interactionCreate', async interaction => {
