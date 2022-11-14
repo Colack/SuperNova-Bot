@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
+    "@napi-rs/canvas": "^0.1.29",
     "@types/node": "^18.0.6",
     "discord.js": "^14.3.0",
-    "node-fetch": "^2.6.7"
+    "express": "^4.18.1",
+    "node-fetch": "^2.6.6"
   }
 }
