@@ -1,1 +1,0 @@
-node deploy-commands.js
