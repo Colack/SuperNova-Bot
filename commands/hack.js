@@ -17,7 +17,7 @@ module.exports = {
 			const embed = new EmbedBuilder()
 				.setColor("#ff6633")
         .setTitle(`Hacking Results for ` + interaction.options.getString("user"))
-        .setDescription(`Name - ${data.first_name} ${data.last_name}\nGender - ${data.gender}\nPassword - ${data.password}\nAddress - ${data.address.street_address}, ${data.address.street_name}, ${data.address.city}\nCredit Card Number - ${data.credit_card.cc_number}`)
+        .setDescription(`Name - ${data.first_name} ${data.last_name}\nGender - ${data.gender}\nPassword - ${data.password}\nAddress - ${data.address.street_address}, ${data.address.street_name}, ${data.address.city}`)
         .setImage(data.avatar)
         .setTimestamp()
 				.setFooter({
