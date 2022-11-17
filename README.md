@@ -8,8 +8,9 @@ Check the license (GPL) for more information about copying.
 
 # Information
 
-SuperNova is a Discord Bot that ties in with my (Upcoming) Minecraft Hack client, SuperNova.
-It can show stats about the client, users, etc.
+SuperNova is a Discord Bot designed to be a replacement and recreation of my old bot, Orbital.   
+It brings back some of the old features, including fun comands, and integrations with APIS.   
+The original source code for Orbital can be found at [https://github.com/Colack/Orbital].
 
 
 
